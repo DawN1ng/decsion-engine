@@ -1,0 +1,8 @@
+labels:
+  foundation_wallets:
+    - "0xFoundationWallet1"
+  whale_wallets:
+    - "0xWhaleWalletA"
+  exchange_clusters:
+    - "binance_cluster_1"
+    - "bybit_cluster_2"

@@ -1,0 +1,6 @@
+thresholds:
+  build_long: 0.45
+  probe_long: 0.25
+  reduce_or_short: 0.30
+  max_risk: 0.60
+  min_exec_score: 0.05
