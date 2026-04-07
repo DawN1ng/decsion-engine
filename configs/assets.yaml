@@ -1,0 +1,57 @@
+assets:
+  - symbol: ETH
+    name: Ethereum
+    category: midcap_alt
+    chain: ethereum
+    token_address: null
+    quote_currency: USDT
+    is_active: true
+  - symbol: SOL
+    name: Solana
+    category: midcap_alt
+    chain: solana
+    token_address: null
+    quote_currency: USDT
+    is_active: true
+  - symbol: ARB
+    name: Arbitrum
+    category: alpha_new
+    chain: ethereum
+    token_address: "0x912CE59144191C1204E64559FE8253a0e49E6548"
+    quote_currency: USDT
+    is_active: true
+  - symbol: OP
+    name: Optimism
+    category: alpha_new
+    chain: ethereum
+    token_address: "0x4200000000000000000000000000000000000042"
+    quote_currency: USDT
+    is_active: true
+  - symbol: AAVE
+    name: Aave
+    category: midcap_alt
+    chain: ethereum
+    token_address: "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DdAe9"
+    quote_currency: USDT
+    is_active: true
+  - symbol: PENDLE
+    name: Pendle
+    category: alpha_new
+    chain: ethereum
+    token_address: "0x808507121B80c02388fAd14726482e061B8da827"
+    quote_currency: USDT
+    is_active: true
+  - symbol: ENA
+    name: Ethena
+    category: alpha_new
+    chain: ethereum
+    token_address: "0x57e114B691Db790C35207b2e685D4A43181e6061"
+    quote_currency: USDT
+    is_active: true
+  - symbol: ALPHA1
+    name: Alpha Placeholder 1
+    category: onchain_only
+    chain: base
+    token_address: "0x0000000000000000000000000000000000000001"
+    quote_currency: USDT
+    is_active: true

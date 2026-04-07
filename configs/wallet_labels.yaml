@@ -1,0 +1,12 @@
+exchange_clusters:
+  - binance_hot_1
+  - bybit_hot_1
+team_wallets:
+  - team_wallet_eth_1
+  - team_wallet_sol_1
+foundation_wallets:
+  - foundation_wallet_1
+  - foundation_wallet_2
+whale_watchlist:
+  - whale_wallet_a
+  - whale_wallet_b

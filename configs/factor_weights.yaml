@@ -1,0 +1,37 @@
+weights:
+  midcap_alt:
+    long_cex: 0.28
+    long_whale: 0.30
+    long_derivatives: 0.20
+    long_exec: 0.22
+    short_cex: 0.30
+    short_whale: 0.28
+    short_derivatives: 0.27
+    short_liquidity_weakness: 0.15
+    risk_derivatives: 0.45
+    risk_exec: 0.35
+    risk_team_pressure: 0.20
+  alpha_new:
+    long_cex: 0.22
+    long_whale: 0.28
+    long_derivatives: 0.15
+    long_exec: 0.35
+    short_cex: 0.24
+    short_whale: 0.32
+    short_derivatives: 0.24
+    short_liquidity_weakness: 0.20
+    risk_derivatives: 0.35
+    risk_exec: 0.45
+    risk_team_pressure: 0.20
+  onchain_only:
+    long_cex: 0.10
+    long_whale: 0.45
+    long_derivatives: 0.05
+    long_exec: 0.40
+    short_cex: 0.10
+    short_whale: 0.45
+    short_derivatives: 0.10
+    short_liquidity_weakness: 0.35
+    risk_derivatives: 0.20
+    risk_exec: 0.50
+    risk_team_pressure: 0.30

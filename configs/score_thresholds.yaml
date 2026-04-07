@@ -1,0 +1,37 @@
+thresholds:
+  midcap_alt:
+    build_long: 0.72
+    probe_long: 0.55
+    reduce_or_short: 0.68
+    reduce_risk: 0.62
+    max_risk: 0.55
+    probe_max_risk: 0.65
+    min_exec_score: 0.45
+    watch_long: 0.40
+    watch_short: 0.40
+    exit_short_score: 0.75
+    exit_risk_score: 0.72
+  alpha_new:
+    build_long: 0.78
+    probe_long: 0.58
+    reduce_or_short: 0.64
+    reduce_risk: 0.60
+    max_risk: 0.50
+    probe_max_risk: 0.62
+    min_exec_score: 0.52
+    watch_long: 0.42
+    watch_short: 0.42
+    exit_short_score: 0.72
+    exit_risk_score: 0.70
+  onchain_only:
+    build_long: 0.70
+    probe_long: 0.53
+    reduce_or_short: 0.62
+    reduce_risk: 0.58
+    max_risk: 0.58
+    probe_max_risk: 0.66
+    min_exec_score: 0.40
+    watch_long: 0.38
+    watch_short: 0.38
+    exit_short_score: 0.68
+    exit_risk_score: 0.68

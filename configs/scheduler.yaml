@@ -1,0 +1,11 @@
+interval_seconds:
+  market: 60
+  cex_flow: 60
+  derivatives: 60
+  onchain: 300
+  liquidity: 300
+  factors: 300
+  signals: 300
+  alerts: 300
+  macro: 3600
+alert_cooldown_minutes: 20

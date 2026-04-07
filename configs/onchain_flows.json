@@ -1,0 +1,5 @@
+[
+  {"asset_symbol": "ETH", "from": "whale_wallet_a", "to": "private_wallet_x", "usd_amount": 850000},
+  {"asset_symbol": "ETH", "from": "team_wallet_eth_1", "to": "binance_hot_1", "usd_amount": 120000},
+  {"asset_symbol": "SOL", "from": "foundation_wallet_1", "to": "bybit_hot_1", "usd_amount": 75000}
+]
