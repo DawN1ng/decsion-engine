@@ -47,6 +47,7 @@ class CexFlowSnapshot(Base):
     outflow_usd: Mapped[Decimal] = mapped_column(Numeric(24, 8), default=0)
     netflow_usd: Mapped[Decimal] = mapped_column(Numeric(24, 8), default=0)
     source_type: Mapped[str] = mapped_column(String(32), default="derived")
+    trust_level: Mapped[str] = mapped_column(String(16), default="low")
     raw_payload: Mapped[dict] = mapped_column(JSON, default=dict)
 
 
@@ -75,7 +76,7 @@ class DerivativesSnapshot(Base):
     contract_type: Mapped[str] = mapped_column(String(32), default="perpetual")
     ts: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
     open_interest_usd: Mapped[Decimal] = mapped_column(Numeric(24, 8), default=0)
-    open_interest_change_1h_pct: Mapped[Decimal] = mapped_column(Numeric(12, 4), default=0)
+    open_interest_change_1h_pct: Mapped[Decimal | None] = mapped_column(Numeric(12, 4), nullable=True)
     funding_rate: Mapped[Decimal] = mapped_column(Numeric(12, 8), default=0)
     funding_rate_zscore_7d: Mapped[Decimal] = mapped_column(Numeric(12, 4), default=0)
     raw_payload: Mapped[dict] = mapped_column(JSON, default=dict)

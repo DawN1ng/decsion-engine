@@ -1,0 +1,4 @@
+[
+  {"asset_symbol": "ETH", "venue": "binance", "inflow_usd": 95000, "outflow_usd": 120000},
+  {"asset_symbol": "SOL", "venue": "binance", "inflow_usd": 42000, "outflow_usd": 30000}
+]

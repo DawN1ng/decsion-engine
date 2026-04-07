@@ -8,6 +8,7 @@ from decimal import Decimal
 class FactorInputs:
     netflow_usd: Decimal
     volume_24h: Decimal
+    cex_flow_trust_level: str
     whale_netflow_usd: Decimal
     team_to_exchange_usd: Decimal
     foundation_to_exchange_usd: Decimal
@@ -23,17 +24,20 @@ class FactorInputs:
 
 
 class FactorEngine:
+    TRUST_DISCOUNT = {"low": Decimal("0.5"), "medium": Decimal("0.8"), "high": Decimal("1")}
+
     @staticmethod
     def _clamp(value: Decimal) -> Decimal:
         return max(Decimal("-1"), min(Decimal("1"), value))
 
     def compute(self, data: FactorInputs) -> tuple[dict[str, Decimal], dict[str, list[str]]]:
         explanations: dict[str, list[str]] = {}
-
         volume = data.volume_24h if data.volume_24h > 0 else Decimal("1")
+
+        trust_multiplier = self.TRUST_DISCOUNT.get(data.cex_flow_trust_level, Decimal("0.5"))
         netflow_ratio = data.netflow_usd / volume
-        cex_score = self._clamp(netflow_ratio * Decimal("8"))
-        explanations["cex_netflow"] = [f"netflow/volume={netflow_ratio:.6f}"]
+        cex_score = self._clamp(netflow_ratio * Decimal("8") * trust_multiplier)
+        explanations["cex_netflow"] = [f"netflow/volume={netflow_ratio:.6f}", f"trust={data.cex_flow_trust_level}"]
 
         team_pressure = data.team_to_exchange_usd + data.foundation_to_exchange_usd
         whale_ratio = data.whale_netflow_usd / volume
@@ -53,7 +57,7 @@ class FactorEngine:
                 oi_score = Decimal("-0.8")
             elif healthy:
                 oi_score = Decimal("0.35")
-        explanations["oi_funding"] = ["neutral without derivatives" if oi_score == 0 else f"oi_funding={oi_score}"]
+        explanations["oi_funding"] = ["neutral due to missing OI/funding context" if data.open_interest_change_1h_pct is None else f"oi_funding={oi_score}"]
 
         depth_total = data.orderbook_depth_usd_1pct + data.dex_liquidity_usd
         depth_score = self._clamp((depth_total / Decimal("10000000")) - Decimal("0.2"))

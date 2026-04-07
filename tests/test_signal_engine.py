@@ -30,3 +30,18 @@ def test_signal_engine_exit_from_previous_long() -> None:
     )
     assert action == "EXIT"
     assert confidence >= Decimal("0.80")
+
+
+def test_signal_engine_adds_low_trust_reason() -> None:
+    action, confidence, reasons, _ = SignalEngine(THRESHOLDS).decide(
+        {
+            "long_score": Decimal("0.75"),
+            "short_score": Decimal("0.10"),
+            "risk_score": Decimal("0.20"),
+            "exec_score": Decimal("0.80"),
+        },
+        cex_flow_trust_level="low",
+    )
+    assert action == "BUILD_LONG"
+    assert any("derived" in r for r in reasons)
+    assert confidence < Decimal("0.88")

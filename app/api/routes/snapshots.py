@@ -10,6 +10,7 @@ from app.domain.schemas.common import (
     OnchainFlowSchema,
     SnapshotBundleSchema,
 )
+from app.domain.services.data_quality_service import DataQualityService
 from app.repositories.snapshot_repository import SnapshotRepository
 
 router = APIRouter(prefix="/snapshots", tags=["snapshots"])
@@ -24,6 +25,7 @@ async def get_snapshot_bundle(symbol: str, session: AsyncSession = Depends(get_d
     onchain = await repo.latest_onchain(symbol)
     derivatives = await repo.latest_derivatives(symbol)
     liquidity = await repo.latest_liquidity(symbol)
+    quality = DataQualityService().summarize(market, cex_flow, onchain, derivatives, liquidity)
     return SnapshotBundleSchema(
         symbol=symbol,
         market=MarketSnapshotSchema.model_validate(market) if market else None,
@@ -31,4 +33,5 @@ async def get_snapshot_bundle(symbol: str, session: AsyncSession = Depends(get_d
         onchain=OnchainFlowSchema.model_validate(onchain) if onchain else None,
         derivatives=DerivativesSnapshotSchema.model_validate(derivatives) if derivatives else None,
         liquidity=LiquiditySnapshotSchema.model_validate(liquidity) if liquidity else None,
+        data_quality=quality,
     )

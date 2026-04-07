@@ -48,7 +48,7 @@ async def ingest_onchain_flow_job(asset: dict, repo: SnapshotRepository) -> None
 
 
 async def ingest_coingecko_liquidity_job(asset: dict, repo: SnapshotRepository) -> None:
-    payload = await CoinGeckoOnchainClient().fetch(asset["symbol"], chain=asset.get("chain") or "eth")
+    payload = await CoinGeckoOnchainClient().fetch(asset["symbol"], chain=asset.get("chain") or "eth", token_address=asset.get("token_address"))
     snap = LiquiditySnapshot(ts=datetime.now(timezone.utc), **payload)
     await repo.insert(snap)
 
@@ -79,6 +79,7 @@ async def compute_factors_job(asset: dict, repo: SnapshotRepository) -> None:
         FactorInputs(
             netflow_usd=cex_flow.netflow_usd,
             volume_24h=market.volume_24h,
+            cex_flow_trust_level=cex_flow.trust_level,
             whale_netflow_usd=onchain.whale_netflow_usd,
             team_to_exchange_usd=onchain.team_to_exchange_usd,
             foundation_to_exchange_usd=onchain.foundation_to_exchange_usd,
@@ -114,8 +115,11 @@ async def compute_signals_job(asset: dict, repo: SnapshotRepository) -> None:
         }
     )
     previous = await repo.latest_signal(symbol)
+    cex_flow = await repo.latest_cex_flow(symbol)
     action, confidence, reasons, invalidations = SignalEngine(thresholds).decide(
-        scores, previous_action=previous.action if previous else None
+        scores,
+        previous_action=previous.action if previous else None,
+        cex_flow_trust_level=cex_flow.trust_level if cex_flow else "none",
     )
     sig = Signal(
         asset_symbol=symbol,

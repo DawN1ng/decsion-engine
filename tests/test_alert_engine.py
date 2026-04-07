@@ -14,6 +14,7 @@ def test_alert_engine_builds_expected_alert_types() -> None:
         outflow_usd=Decimal("80"),
         netflow_usd=Decimal("-20"),
         source_type="derived",
+        trust_level="low",
         raw_payload={},
     )
     onchain = OnchainFlow(
@@ -42,6 +43,6 @@ def test_alert_engine_builds_expected_alert_types() -> None:
     )
     alerts = AlertEngine().build_data_alerts("ETH", cex, onchain, signal)
     types = {a.alert_type for a in alerts}
-    assert "HIGH_EXCHANGE_INFLOW" in types
+    assert "HIGH_EXCHANGE_INFLOW" not in types
     assert "TEAM_TO_EXCHANGE" in types
     assert "SIGNAL_DOWNGRADE" in types

@@ -15,7 +15,7 @@ class AlertEngine:
     ) -> list[Alert]:
         alerts: list[Alert] = []
         now = datetime.now(timezone.utc)
-        if cex_flow and cex_flow.netflow_usd < 0:
+        if cex_flow and cex_flow.netflow_usd < 0 and cex_flow.trust_level != "low":
             alerts.append(
                 Alert(
                     asset_symbol=symbol,
@@ -23,7 +23,7 @@ class AlertEngine:
                     severity="medium",
                     alert_type="HIGH_EXCHANGE_INFLOW",
                     message=f"{symbol} net inflow into exchange increased",
-                    details_json={"netflow_usd": str(cex_flow.netflow_usd), "venue": cex_flow.venue},
+                    details_json={"netflow_usd": str(cex_flow.netflow_usd), "venue": cex_flow.venue, "trust_level": cex_flow.trust_level},
                 )
             )
         if onchain and (onchain.team_to_exchange_usd + onchain.foundation_to_exchange_usd) > 0:

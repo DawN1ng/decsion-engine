@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -26,6 +25,9 @@ class Settings(BaseSettings):
 
     scheduler_enabled: bool = True
     scheduler_timezone: str = "UTC"
+
+    cex_flow_mode: str = "derived"
+    cex_manual_flows_path: Path = Path("configs/cex_flows.json")
 
     config_dir: Path = Path("configs")
     onchain_manual_flows_path: Path = Path("configs/onchain_flows.json")

@@ -38,6 +38,7 @@ class CexFlowSchema(BaseModel):
     outflow_usd: Decimal
     netflow_usd: Decimal
     source_type: str
+    trust_level: str
 
 
 class OnchainFlowSchema(BaseModel):
@@ -60,7 +61,7 @@ class DerivativesSnapshotSchema(BaseModel):
     contract_type: str
     ts: datetime
     open_interest_usd: Decimal
-    open_interest_change_1h_pct: Decimal
+    open_interest_change_1h_pct: Decimal | None
     funding_rate: Decimal
     funding_rate_zscore_7d: Decimal
 
@@ -86,6 +87,7 @@ class SnapshotBundleSchema(BaseModel):
     onchain: OnchainFlowSchema | None
     derivatives: DerivativesSnapshotSchema | None
     liquidity: LiquiditySnapshotSchema | None
+    data_quality: dict[str, Any]
 
 
 class FactorScoreSchema(BaseModel):
@@ -111,6 +113,7 @@ class SignalSchema(BaseModel):
     confidence: Decimal
     reasons_json: list[str]
     invalidation_conditions_json: list[str]
+    source_trust: dict[str, Any] | None = None
 
 
 class AlertSchema(BaseModel):

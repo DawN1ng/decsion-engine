@@ -50,6 +50,14 @@ python -m app.jobs.worker
 - `configs/score_thresholds.yaml` per-category thresholds.
 - `configs/scheduler.yaml` polling intervals + alert cooldown.
 
+
+## Current trust model / known limitations
+- Market data: real public Binance endpoints.
+- Derivatives data: real public Bybit endpoints with OI 1h change from OI history time series (not inferred from unrelated ticker fields).
+- DEX liquidity: GeckoTerminal with token-address-first selection; symbol search is ranked fallback.
+- Onchain flow: config/manual labeled feed (`configs/onchain_flows.json`).
+- CEX flow: mode-driven (`derived`, `manual_cluster`, `real_cluster hook`). Derived mode is low-trust and discounted in factor/signal logic.
+
 ## Test
 ```bash
 pytest -q
