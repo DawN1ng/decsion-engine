@@ -1,0 +1,5 @@
+weights:
+  cex_netflow: 0.35
+  whale_activity: 0.30
+  oi_funding: 0.20
+  liquidity_exec: 0.15
